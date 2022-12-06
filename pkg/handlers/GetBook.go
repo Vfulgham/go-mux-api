@@ -12,7 +12,7 @@ import (
 func GetBook(w http.ResponseWriter, r *http.Request) {
     // Read id parameter
     vars := mux.Vars(r)
-    id, _ := strconv.Atoi(vars["id"])
+    id, _ := strconv.Atoi(vars["id"]) // convert string to int
 
     // Iterate over all the mock books
     for _, book := range mocks.Books {

@@ -4,14 +4,13 @@ import (
 	"log"
 	"net/http"
 	"encoding/json"
-	"math/rand"
 	"io/ioutil"
+    "fmt"
 
 	"github.com/Vfulgham/go-mux-api/pkg/models"
-	"github.com/Vfulgham/go-mux-api/pkg/mocks"
 )
 
-func AddBook(w http.ResponseWriter, r *http.Request) {
+func (h handler) AddBook(w http.ResponseWriter, r *http.Request) {
     
     defer r.Body.Close()
     body, err := ioutil.ReadAll(r.Body)
@@ -23,9 +22,10 @@ func AddBook(w http.ResponseWriter, r *http.Request) {
     var book models.Book
     json.Unmarshal(body, &book) // map json to struct and put into variable book
 
-    // Append to the Book mocks
-    book.Id = rand.Intn(100)
-    mocks.Books = append(mocks.Books, book)
+    // add book to db
+    if result := h.DB.Create(&book); result.Error != nil {
+            fmt.Println(result.Error)
+    }
 
     // Send a 201 created response
     w.Header().Add("Content-Type", "application/json")

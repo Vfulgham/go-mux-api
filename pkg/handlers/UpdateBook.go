@@ -12,7 +12,7 @@ import (
     "github.com/Vfulgham/go-mux-api/pkg/models"
 )
 
-func UpdateBook(w http.ResponseWriter, r *http.Request) {
+func (h handler) UpdateBook(w http.ResponseWriter, r *http.Request) {
     // Read id parameter
     vars := mux.Vars(r)
     id, _ := strconv.Atoi(vars["id"])

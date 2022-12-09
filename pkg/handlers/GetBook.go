@@ -9,7 +9,7 @@ import (
 	"github.com/Vfulgham/go-mux-api/pkg/mocks"
 )
 
-func GetBook(w http.ResponseWriter, r *http.Request) {
+func (h handler) GetBook(w http.ResponseWriter, r *http.Request) {
     // Read id parameter
     vars := mux.Vars(r)
     id, _ := strconv.Atoi(vars["id"]) // convert string to int

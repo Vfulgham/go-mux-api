@@ -8,3 +8,4 @@ type handler struct {
 
 func New(db *gorm.DB) handler {
     return handler{db}
+}

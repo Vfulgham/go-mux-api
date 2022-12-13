@@ -22,7 +22,7 @@ func main() {
 	router.HandleFunc("/books", h.GetAllBooks).Methods(http.MethodGet)
 	router.HandleFunc("/books", h.AddBook).Methods(http.MethodPost)
 	router.HandleFunc("/books/{id}", h.GetBook).Methods(http.MethodGet)
-	router.HandleFunc("/books/{id}", h.UpdateBook).Methods(http.MethodPut)
+	router.HandleFunc("/books/{id}", h.UpdateBook).Methods(http.MethodPut) // add to mock example (not added to db)
 	router.HandleFunc("/books/{id}", h.DeleteBook).Methods(http.MethodDelete)
 
 	log.Println("API is running")

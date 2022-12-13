@@ -1,29 +1,31 @@
 package handlers
 
 import (
-    "encoding/json"
-    "net/http"
-    "strconv"
+	"encoding/json"
+	"net/http"
+	"strconv"
+    "fmt"
 
-    "github.com/gorilla/mux"
-    "github.com/Vfulgham/go-mux-api/pkg/mocks"
+	"github.com/Vfulgham/go-mux-api/pkg/models"
+	"github.com/gorilla/mux"
 )
 
 func (h handler) DeleteBook(w http.ResponseWriter, r *http.Request) {
-    // Read id parameter
-    vars := mux.Vars(r)
-    id, _ := strconv.Atoi(vars["id"])
+	// Read id parameter
+	vars := mux.Vars(r)
+	id, _ := strconv.Atoi(vars["id"])
 
-    // Iterate over all the mock Books
-    for index, book := range mocks.Books {
-        if book.Id == id {
-            // Delete book and send a response if the book Id matches dynamic Id
-            mocks.Books = append(mocks.Books[:index], mocks.Books[index+1:]...)
+    var book models.Book
 
-            w.Header().Add("Content-Type", "application/json")
-            w.WriteHeader(http.StatusOK)
-            json.NewEncoder(w).Encode("Deleted")
-            break
-        }
-    }
+    // if id matches id on any book in db
+	if result := h.DB.First(&book, id); result.Error != nil {
+		fmt.Println(result.Error)
+	}
+    // delete book
+    h.DB.Delete(&book)
+
+	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode("Deleted")
+
 }

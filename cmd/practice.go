@@ -15,7 +15,7 @@ func add(args ...int) int {
 	return total
 }
 
-func main2() {
+func practice() {
 
 	total := add(1, 2, 3)
 	fmt.Println(total)
@@ -28,13 +28,15 @@ func main2() {
 		fmt.Print(i, "-", name, ", ")
 	}
 
-	const vic, steve, kylis = "forty", "forty2", "forty3"
+	//const vic, steve, kylis = "forty", "forty2", "forty3"
 
-	const (
-		vic2   = "forty"
-		steve2 = "forty2"
-		kylis2 = "forty3"
-	)
+	/*
+		const (
+			vic2   = "forty"
+			steve2 = "forty2"
+			kylis2 = "forty3"
+		)
+	*/
 
 	var myArr [2]int
 	myArr[0] = 1
